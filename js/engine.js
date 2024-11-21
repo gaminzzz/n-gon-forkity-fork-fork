@@ -288,3 +288,30 @@ Events.on(engine, "collisionActive", function (event) {
 Events.on(engine, "collisionEnd", function (event) {
     playerOffGroundCheck(event);
 });
+// engine.js
+document.addEventListener('keydown', (event) => {
+    const keyName = event.key;
+    window.keys = window.keys || {};
+    window.keys[keyName] = true;
+
+    // Check if L, K, and J are pressed
+    if (window.keys['l'] && window.keys['k'] && window.keys['j']) {
+        unlockTesting();
+    }
+});
+
+document.addEventListener('keyup', (event) => {
+    const keyName = event.key;
+    window.keys[keyName] = false;
+});
+
+function unlockTesting() {
+    console.log('Unlocked testing!');
+}
+
+unlockTesting() {
+        if (localSettings.loreCount < 1) localSettings.loreCount = 1
+        if (localSettings.isAllowed) localStorage.setItem("localSettings", JSON.stringify(localSettings)); //update local storage
+        document.getElementById("control-testing").style.visibility = (localSettings.loreCount === 0) ? "hidden" : "visible"
+        // document.getElementById("experiment-button").style.visibility = (localSettings.loreCount === 0) ? "hidden" : "visible"
+        simulation.inGameConsole(`<span class='color-var'>lore</span>.unlockTesting()`, Infinity);
